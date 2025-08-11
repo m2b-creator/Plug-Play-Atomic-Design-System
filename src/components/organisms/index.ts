@@ -1,5 +1,20 @@
 // Organisms - Complex, feature-complete components
-// Components will be exported here as they are created
 
-// Placeholder export to prevent TypeScript module errors
-export {};
+// Navigation & Layout
+export * from './Header';
+export * from './Footer';
+export * from './Sidebar';
+
+// Data Display
+export * from './DataTable';
+
+// Overlays & Modals
+export * from './Modal';
+export * from './Drawer';
+
+// Forms
+export * from './Form';
+
+// Media & Content
+export * from './Carousel';
+export * from './ImageGallery';
