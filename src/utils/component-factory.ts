@@ -1,5 +1,5 @@
 import { cn } from './cn';
-import type { BaseComponentProps } from '../types';
+import type { BaseComponentProps } from '@/types';
 
 /**
  * Generic component factory that creates components with consistent styling patterns
@@ -48,10 +48,10 @@ export function createAccessibleProps(
     'aria-pressed'?: boolean;
   }
 ) {
-  const { 'data-testid': testId, role, ...ariaProps } = props;
+  const { 'data-test-id': testId, role, ...ariaProps } = props;
   
   return {
-    ...(testId && { 'data-testid': testId }),
+    ...(testId && { 'data-test-id': testId }),
     ...(role && { role }),
     ...Object.entries(ariaProps).reduce((acc, [key, value]) => {
       if (key.startsWith('aria-') && value !== undefined) {

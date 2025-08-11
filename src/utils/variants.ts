@@ -1,4 +1,4 @@
-import type { ComponentSize, ColorVariant, ButtonVariant } from '../types';
+import type { ComponentSize, ColorVariant, ButtonVariant } from '@/types';
 
 /**
  * Size utility classes for components

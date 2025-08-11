@@ -20,7 +20,7 @@ export interface BaseComponentProps {
   /** Whether the component is disabled */
   disabled?: boolean;
   /** Test ID for automated testing */
-  'data-testid'?: string;
+  'data-test-id'?: string;
 }
 
 /**
