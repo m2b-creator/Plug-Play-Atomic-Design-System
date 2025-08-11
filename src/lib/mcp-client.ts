@@ -32,11 +32,10 @@ export class SerenaClient {
   }
 
   async callTool(name: string, arguments_?: Record<string, unknown>) {
-    const response = await this.client.callTool({
+      return await this.client.callTool({
       name,
       arguments: arguments_ || {},
     });
-    return response;
   }
 
   async disconnect() {
