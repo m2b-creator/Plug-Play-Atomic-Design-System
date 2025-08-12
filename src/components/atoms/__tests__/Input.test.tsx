@@ -78,7 +78,7 @@ describe('Input', () => {
   });
 
   it('supports fullWidth prop', () => {
-    render(<Input fullWidth data-testid="input-wrapper" />);
+    render(<Input fullWidth data-test-id="input-wrapper" />);
     expect(screen.getByTestId('input-wrapper')).toHaveClass('w-full');
   });
 

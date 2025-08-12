@@ -38,7 +38,7 @@ export const FormField = ({
   id,
   ...inputProps
 }: FormFieldProps) => {
-  const fieldId = id || `field-${Math.random().toString(36).substr(2, 9)}`;
+  const fieldId = id || `field-${Math.random().toString(36).slice(2, 9)}`;
   const errorId = error ? `${fieldId}-error` : undefined;
   const helperTextId = helperText ? `${fieldId}-helper` : undefined;
 

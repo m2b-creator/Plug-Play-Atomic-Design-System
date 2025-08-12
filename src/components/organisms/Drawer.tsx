@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { Button, Icon, Heading } from '../atoms';

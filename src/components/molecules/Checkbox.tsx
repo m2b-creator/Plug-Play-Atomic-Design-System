@@ -64,7 +64,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(({
   id,
   ...props
 }, ref) => {
-  const checkboxId = id || `checkbox-${Math.random().toString(36).substr(2, 9)}`;
+  const checkboxId = id || `checkbox-${Math.random().toString(36).slice(2, 9)}`;
 
   const containerClasses = cn(
     'flex items-start gap-3',

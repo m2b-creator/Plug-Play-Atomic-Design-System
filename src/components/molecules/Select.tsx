@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useState, useRef } from 'react';
 import { Icon } from '../atoms';
 import { Dropdown } from './Dropdown';
@@ -24,12 +24,12 @@ export interface SelectOption {
 export interface SelectProps {
   /** Array of select options */
   options: SelectOption[];
-  /** Currently selected value */
-  value?: string;
-  /** Default selected value for uncontrolled component */
-  defaultValue?: string;
+  /** Currently selected value(s) */
+  value?: string | string[];
+  /** Default selected value(s) for uncontrolled component */
+  defaultValue?: string | string[];
   /** Callback when selection changes */
-  onChange?: (value: string) => void;
+  onChange?: (value: string | string[]) => void;
   /** Placeholder text when nothing is selected */
   placeholder?: string;
   /** Size of the select */
@@ -65,33 +65,74 @@ export const Select = ({
   size = 'md',
   disabled = false,
   error = false,
-  // multiple = false, // TODO: implement multiple selection
+  multiple = false,
   searchable = false,
   className,
   'data-test-id': testId,
 }: SelectProps) => {
-  const [internalValue, setInternalValue] = useState(defaultValue || '');
+  const [internalValue, setInternalValue] = useState(() => {
+    if (multiple) {
+      return Array.isArray(defaultValue) ? defaultValue : (defaultValue ? [defaultValue] : []);
+    }
+    return Array.isArray(defaultValue) ? defaultValue[0] || '' : (defaultValue || '');
+  });
   const [searchTerm, setSearchTerm] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  // Handle keyboard navigation for multiple selection
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (!multiple || !isOpen) return;
+    
+    if (event.key === 'Escape') {
+      setIsOpen(false);
+    } else if (event.key === 'Enter' && event.target instanceof HTMLElement) {
+      const menuItem = event.target.closest('[role="option"]');
+      if (menuItem) {
+        const optionValue = menuItem.getAttribute('data-value');
+        if (optionValue) {
+          handleSelect(optionValue);
+        }
+      }
+    }
+  };
 
   // Use controlled or uncontrolled value
   const selectedValue = controlledValue !== undefined ? controlledValue : internalValue;
 
   const handleSelect = (optionValue: string) => {
-    const newValue = optionValue;
-    
-    if (controlledValue === undefined) {
-      setInternalValue(newValue);
+    if (multiple) {
+      const currentValues = Array.isArray(selectedValue) ? selectedValue : (selectedValue ? [selectedValue] : []);
+      const isSelected = currentValues.includes(optionValue);
+      
+      const newValue = isSelected
+        ? currentValues.filter(value => value !== optionValue)
+        : [...currentValues, optionValue];
+      
+      if (controlledValue === undefined) {
+        setInternalValue(newValue);
+      }
+      
+      onChange?.(newValue);
+      // Don't close dropdown for multiple selection
+      setSearchTerm('');
+    } else {
+      const newValue = optionValue;
+      
+      if (controlledValue === undefined) {
+        setInternalValue(newValue);
+      }
+      
+      onChange?.(newValue);
+      setIsOpen(false);
+      setSearchTerm('');
     }
-    
-    onChange?.(newValue);
-    setIsOpen(false);
-    setSearchTerm('');
   };
 
-  // Find selected option
-  const selectedOption = options.find(option => option.value === selectedValue);
+  // Find selected option(s)
+  const selectedValues = Array.isArray(selectedValue) ? selectedValue : (selectedValue ? [selectedValue] : []);
+  const selectedOptions = options.filter(option => selectedValues.includes(option.value));
+  const selectedOption = multiple ? null : options.find(option => option.value === selectedValue);
 
   // Filter options based on search term
   const filteredOptions = searchable && searchTerm
@@ -129,16 +170,34 @@ export const Select = ({
       aria-haspopup="listbox"
       aria-expanded={isOpen}
       data-test-id={testId}
+      onKeyDown={handleKeyDown}
     >
       <span className="flex items-center min-w-0 flex-1">
-        {selectedOption?.icon && (
-          <span className="flex-shrink-0 mr-2">
-            {selectedOption.icon}
-          </span>
+        {multiple ? (
+          selectedOptions.length > 0 ? (
+            <span className="truncate">
+              {selectedOptions.length === 1 
+                ? selectedOptions[0].label
+                : selectedOptions.length <= 3
+                  ? selectedOptions.map(opt => opt.label).join(', ')
+                  : `${selectedOptions.length} items selected`
+              }
+            </span>
+          ) : (
+            <span className="truncate text-gray-500">{placeholder}</span>
+          )
+        ) : (
+          <>
+            {selectedOption?.icon && (
+              <span className="flex-shrink-0 mr-2">
+                {selectedOption.icon}
+              </span>
+            )}
+            <span className="truncate">
+              {selectedOption ? selectedOption.label : placeholder}
+            </span>
+          </>
         )}
-        <span className="truncate">
-          {selectedOption ? selectedOption.label : placeholder}
-        </span>
       </span>
       <Icon
         name="ChevronDown"
@@ -176,8 +235,9 @@ export const Select = ({
             key={option.value}
             size={size}
             disabled={option.disabled}
-            selected={option.value === selectedValue}
+            selected={selectedValues.includes(option.value)}
             leftIcon={option.icon}
+            rightIcon={multiple && selectedValues.includes(option.value) ? <Icon name="Check" size="sm" /> : undefined}
             description={option.description}
             onClick={() => !option.disabled && handleSelect(option.value)}
           >
@@ -194,7 +254,7 @@ export const Select = ({
       open={isOpen}
       onOpenChange={setIsOpen}
       closeOnClickOutside={true}
-      closeOnItemClick={true}
+      closeOnItemClick={!multiple}
       className="min-w-full"
     >
       {renderOptions()}

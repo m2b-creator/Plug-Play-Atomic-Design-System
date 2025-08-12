@@ -264,7 +264,7 @@ export default function HomePage() {
                                 </Heading>
                                 <div className="bg-gray-900 rounded-lg p-4 mb-4">
                                     <code className="text-gray-100 text-sm">
-                                        {`<Button variant="primary" size="lg">`}
+                                        {`<Button size="lg">`}
                                     </code>
                                 </div>
                                 <Text variant="body" className="text-gray-600">

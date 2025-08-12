@@ -90,7 +90,7 @@ export const RadioButton = forwardRef<HTMLInputElement, SingleRadioProps>(({
   id,
   ...props
 }, ref) => {
-  const radioId = id || `radio-${Math.random().toString(36).substr(2, 9)}`;
+  const radioId = id || `radio-${Math.random().toString(36).slice(2, 9)}`;
 
   const containerClasses = cn(
     'flex items-start gap-3',
@@ -191,7 +191,7 @@ export const Radio = forwardRef<HTMLInputElement, RadioProps>(({
   'data-test-id': testId,
   ...props
 }, ref) => {
-  const groupId = `radio-group-${Math.random().toString(36).substr(2, 9)}`;
+  const groupId = `radio-group-${Math.random().toString(36).slice(2, 9)}`;
 
   const containerClasses = cn(
     'space-y-2',

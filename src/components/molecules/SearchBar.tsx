@@ -1,4 +1,4 @@
-import type { InputHTMLAttributes, FormEvent } from 'react';
+import React, { InputHTMLAttributes, FormEvent } from 'react';
 import { Button, Input, Icon } from '../atoms';
 import type { ComponentSize } from '@/types';
 import { cn } from '@/utils';

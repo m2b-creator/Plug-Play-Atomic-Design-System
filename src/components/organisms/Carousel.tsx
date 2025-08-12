@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Button, Icon } from '../atoms';
 import type { ComponentSize } from '@/types';
@@ -216,7 +216,8 @@ export const Carousel = ({
     setDragOffset(diff);
   };
 
-  const handleTouchEnd = () => {
+  // Common handler for ending drag operations (touch and mouse)
+  const handleDragEnd = () => {
     if (!enableSwipe || !isDragging) return;
     
     const threshold = 50;
@@ -234,6 +235,10 @@ export const Carousel = ({
     if (autoplay > 0) {
       setIsAutoPlaying(true);
     }
+  };
+
+  const handleTouchEnd = () => {
+    handleDragEnd();
   };
 
   // Mouse handlers for desktop
@@ -253,23 +258,7 @@ export const Carousel = ({
   };
 
   const handleMouseUp = () => {
-    if (!enableSwipe || !isDragging) return;
-    
-    const threshold = 50;
-    
-    if (Math.abs(dragOffset) > threshold) {
-      if (dragOffset > 0) {
-        goToNext();
-      } else {
-        goToPrevious();
-      }
-    }
-    
-    setIsDragging(false);
-    setDragOffset(0);
-    if (autoplay > 0) {
-      setIsAutoPlaying(true);
-    }
+    handleDragEnd();
   };
 
   const handleMouseEnter = () => {

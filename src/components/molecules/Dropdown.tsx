@@ -1,6 +1,6 @@
 'use client';
 
-import type { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { useState, useRef, useEffect } from 'react';
 import type { ComponentSize } from '@/types';
 import { cn, transitionClasses } from '@/utils';

@@ -25,7 +25,7 @@ import {
 } from '@/components';
 
 export default function MoleculesPlaygroundPage() {
-    const [selectedValue, setSelectedValue] = useState('');
+    const [selectedValue, setSelectedValue] = useState<string | string[]>('');
     const [checkboxChecked, setCheckboxChecked] = useState(false);
     const [radioValue, setRadioValue] = useState('option1');
     const [currentPage, setCurrentPage] = useState(1);
@@ -248,6 +248,13 @@ export default function MoleculesPlaygroundPage() {
                             options={selectOptions}
                             placeholder="Error state"
                             error
+                        />
+                        <Select
+                            options={selectOptions}
+                            placeholder="Multiple selection"
+                            multiple
+                            value={Array.isArray(selectedValue) ? selectedValue : []}
+                            onChange={setSelectedValue}
                         />
                     </div>
                 </section>

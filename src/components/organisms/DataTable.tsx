@@ -1,7 +1,7 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icon, Text, Input, Spinner } from '../atoms';
 import { Checkbox, Pagination } from '../molecules';
 import type { ComponentSize } from '@/types';
@@ -174,8 +174,21 @@ export const DataTable = <T extends Record<string, unknown>>({
   className,
   'data-test-id': testId,
 }: DataTableProps<T>) => {
-  const [internalSearchValue, setInternalSearchValue] = useState(searchValue);
-  const [internalFilterValues, setInternalFilterValues] = useState(filterValues);
+  const [internalSearchValue, setInternalSearchValue] = useState('');
+  const [internalFilterValues, setInternalFilterValues] = useState<Record<string, unknown>>({});
+
+  // Sync internal state with prop changes
+  useEffect(() => {
+    if (searchValue !== undefined) {
+      setInternalSearchValue(searchValue);
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (filterValues !== undefined) {
+      setInternalFilterValues(filterValues);
+    }
+  }, [filterValues]);
 
   // Use controlled or uncontrolled search
   const currentSearchValue = searchValue !== undefined ? searchValue : internalSearchValue;

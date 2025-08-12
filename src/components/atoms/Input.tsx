@@ -12,6 +12,8 @@ export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 
   error?: boolean;
   /** Whether the input is disabled */
   disabled?: boolean;
+  /** Whether the input should take full width */
+  fullWidth?: boolean;
   /** Icon to display before the input */
   leftIcon?: ReactNode;
   /** Icon to display after the input */
@@ -43,6 +45,7 @@ export const Input = reactForwardRef<HTMLInputElement, InputProps>(({
   size = 'md',
   error = false,
   disabled = false,
+  fullWidth = false,
   leftIcon,
   rightIcon,
   className,
@@ -50,8 +53,9 @@ export const Input = reactForwardRef<HTMLInputElement, InputProps>(({
   ...props
 }, ref) => {
   const baseClasses = cn(
-    'block w-full rounded-md border bg-white shadow-sm',
+    'block rounded-md border bg-white shadow-sm',
     'placeholder:text-gray-400',
+    fullWidth && 'w-full',
     transitionClasses,
     focusRingClasses,
     disabledClasses,

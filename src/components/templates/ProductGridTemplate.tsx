@@ -264,7 +264,7 @@ export const ProductGridTemplate = ({
         <Select
           options={sortOptions.map(opt => ({ value: opt.value, label: opt.label }))}
           value={currentSort}
-          onChange={handleSortChange}
+          onChange={(value) => handleSortChange(Array.isArray(value) ? value[0] : value)}
           placeholder="Sort by"
           size={size}
         />
@@ -297,7 +297,7 @@ export const ProductGridTemplate = ({
                         label: `${opt.label} ${opt.count ? `(${opt.count})` : ''}` 
                       }))}
                       value={activeFilters[filter.key] as string || ''}
-                      onChange={(value) => handleFilterChange(filter.key, value)}
+                      onChange={(value) => handleFilterChange(filter.key, Array.isArray(value) ? value[0] : value)}
                       placeholder="Select..."
                       size="sm"
                     />

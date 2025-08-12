@@ -209,7 +209,7 @@ export const screenReader = {
 export const aria = {
   // Generate unique IDs for ARIA relationships
   generateId: (prefix = 'aria') => {
-    return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+    return `${prefix}-${Math.random().toString(36).slice(2, 9)}`;
   },
 
   // Create describedby relationship

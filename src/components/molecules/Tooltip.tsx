@@ -179,7 +179,7 @@ export const Tooltip = ({
     />
   );
 
-  const tooltipId = `tooltip-${Math.random().toString(36).substr(2, 9)}`;
+  const tooltipId = `tooltip-${Math.random().toString(36).slice(2, 9)}`;
   
   const triggerProps = {
     'aria-describedby': isVisible ? tooltipId : undefined,
