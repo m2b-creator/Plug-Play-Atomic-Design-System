@@ -8,6 +8,9 @@ export * from './organisms';
 export * from './templates';
 export * from './pages';
 
+// Demo layout for showcase pages
+export { DemoLayout } from './DemoLayout';
+
 // Re-export types and utilities for consumers
 export * from '../types';
 export * from '../utils';

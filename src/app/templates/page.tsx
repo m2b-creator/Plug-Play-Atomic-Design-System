@@ -10,6 +10,7 @@ import {
   Badge,
   Spacer
 } from '@/components';
+import { DemoLayout } from '../../components/DemoLayout';
 
 export default function TemplatesPlaygroundPage() {
   const [activeTemplate, setActiveTemplate] = useState<string | null>(null);
@@ -143,33 +144,31 @@ export default function TemplatesPlaygroundPage() {
 
   if (activeTemplate) {
     return (
-      <div className="min-h-screen">
-        <div className="fixed top-4 left-4 z-50">
-          <Button 
-            variant="outline" 
-            onClick={() => setActiveTemplate(null)}
-            className="bg-white shadow-lg"
-          >
-            ← Back to Templates
-          </Button>
+      <DemoLayout>
+        <div className="container mx-auto px-6 py-8">
+          <div className="mb-8">
+            <Button 
+              variant="outline" 
+              onClick={() => setActiveTemplate(null)}
+              className="bg-white shadow-sm"
+            >
+              ← Back to Templates
+            </Button>
+          </div>
+          <div className="bg-white rounded-lg border border-gray-200 p-8">
+            {renderTemplate()}
+          </div>
         </div>
-        {renderTemplate()}
-      </div>
+      </DemoLayout>
     );
   }
 
   return (
-    <div className="container mx-auto p-8 space-y-12">
-      <div className="text-center">
-        <Heading as="h1" variant="h1" className="mb-4">
-          Templates Playground
-        </Heading>
-        <Text variant="body" color="secondary">
-          Complete page templates and layouts ready for your application.
-        </Text>
-      </div>
-
-      <Divider />
+    <DemoLayout
+      title="Templates Playground"
+      description="Complete page templates and layouts ready for your application."
+    >
+      <div className="container mx-auto px-6 py-12 space-y-16">
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {templates.map((template) => (
@@ -209,36 +208,37 @@ export default function TemplatesPlaygroundPage() {
         ))}
       </div>
 
-      <Spacer size="xl" />
+        <Spacer size="xl" />
 
-      <section className="bg-gray-50 rounded-lg p-8 text-center">
-        <Heading as="h2" variant="h3" className="mb-4">
-          Template Features
-        </Heading>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="space-y-2">
-            <div className="text-2xl mb-2">🎨</div>
-            <Heading as="h3" variant="h5">Fully Customizable</Heading>
-            <Text variant="body" color="secondary">
-              All templates are fully customizable with your brand colors, fonts, and content.
-            </Text>
+        <section className="bg-gray-50 rounded-lg p-8 text-center">
+          <Heading as="h2" variant="h3" className="mb-4 text-gray-900">
+            Template Features
+          </Heading>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div className="space-y-2">
+              <div className="text-2xl mb-2">🎨</div>
+              <Heading as="h3" variant="h5" className="text-gray-900">Fully Customizable</Heading>
+              <Text variant="body" className="text-gray-600">
+                All templates are fully customizable with your brand colors, fonts, and content.
+              </Text>
+            </div>
+            <div className="space-y-2">
+              <div className="text-2xl mb-2">📱</div>
+              <Heading as="h3" variant="h5" className="text-gray-900">Responsive Design</Heading>
+              <Text variant="body" className="text-gray-600">
+                Every template is mobile-first and works perfectly across all devices.
+              </Text>
+            </div>
+            <div className="space-y-2">
+              <div className="text-2xl mb-2">⚡</div>
+              <Heading as="h3" variant="h5" className="text-gray-900">Production Ready</Heading>
+              <Text variant="body" className="text-gray-600">
+                Templates include best practices for SEO, performance, and accessibility.
+              </Text>
+            </div>
           </div>
-          <div className="space-y-2">
-            <div className="text-2xl mb-2">📱</div>
-            <Heading as="h3" variant="h5">Responsive Design</Heading>
-            <Text variant="body" color="secondary">
-              Every template is mobile-first and works perfectly across all devices.
-            </Text>
-          </div>
-          <div className="space-y-2">
-            <div className="text-2xl mb-2">⚡</div>
-            <Heading as="h3" variant="h5">Production Ready</Heading>
-            <Text variant="body" color="secondary">
-              Templates include best practices for SEO, performance, and accessibility.
-            </Text>
-          </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </DemoLayout>
   );
 }

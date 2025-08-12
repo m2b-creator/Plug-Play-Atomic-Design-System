@@ -13,6 +13,7 @@ import {
   SearchBar,
   Icon
 } from '@/components';
+import { DemoLayout } from '../../components/DemoLayout';
 
 export default function DocsPage() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -31,17 +32,18 @@ export default function DocsPage() {
 
   if (selectedComponent) {
     return (
-      <div className="container mx-auto p-8 space-y-8">
-        <div className="flex items-center gap-4 mb-6">
-          <Button 
-            variant="ghost" 
-            onClick={() => setSelectedComponent(null)}
-            leftIcon={<Icon name="ArrowLeft" size="sm" />}
-          >
-            Back to Components
-          </Button>
-          <Badge variant="secondary">{selectedComponent.category}</Badge>
-        </div>
+      <DemoLayout>
+        <div className="container mx-auto px-6 py-8 space-y-8">
+          <div className="flex items-center gap-4 mb-6">
+            <Button 
+              variant="ghost" 
+              onClick={() => setSelectedComponent(null)}
+              leftIcon={<Icon name="ArrowLeft" size="sm" />}
+            >
+              Back to Components
+            </Button>
+            <Badge variant="secondary">{selectedComponent.category}</Badge>
+          </div>
 
         <div className="space-y-8">
           {/* Component Header */}
@@ -191,43 +193,39 @@ export default function DocsPage() {
             </div>
           </section>
         </div>
-      </div>
+        </div>
+      </DemoLayout>
     );
   }
 
   return (
-    <div className="container mx-auto p-8 space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-4">
-        <Heading as="h1" variant="h1">Component Documentation</Heading>
-        <Text variant="body" className="text-lg">
-          Complete reference for all AtomicPNP components with props, examples, and accessibility guidelines.
-        </Text>
-      </div>
+    <DemoLayout
+      title="Component Documentation"
+      description="Complete reference for all AtomicPNP components with props, examples, and accessibility guidelines."
+    >
+      <div className="container mx-auto px-6 py-12 space-y-12">
 
-      {/* Search and Filters */}
-      <div className="space-y-4">
-        <SearchBar
-          placeholder="Search components..."
-          onSearch={setSearchQuery}
-          showButton={false}
-        />
-        
-        <div className="flex flex-wrap gap-2">
-          {categories.map((category) => (
-            <Button
-              key={category}
-              variant={selectedCategory === category ? 'primary' : 'outline'}
-              size="sm"
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1)}
-            </Button>
-          ))}
+        {/* Search and Filters */}
+        <div className="bg-white rounded-lg border border-gray-200 p-8 space-y-6">
+          <SearchBar
+            placeholder="Search components..."
+            onSearch={setSearchQuery}
+            showButton={false}
+          />
+          
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <Button
+                key={category}
+                variant={selectedCategory === category ? 'primary' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category === 'all' ? 'All' : category.charAt(0).toUpperCase() + category.slice(1)}
+              </Button>
+            ))}
+          </div>
         </div>
-      </div>
-
-      <Divider />
 
       {/* Component Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -261,15 +259,16 @@ export default function DocsPage() {
         ))}
       </div>
 
-      {filteredDocs.length === 0 && (
-        <div className="text-center py-12">
-          <Icon name="Search" size="lg" className="text-gray-400 mx-auto mb-4" />
-          <Heading as="h3" variant="h4" color="muted">No components found</Heading>
-          <Text variant="body" color="muted">
-            Try adjusting your search or filter criteria.
-          </Text>
-        </div>
-      )}
-    </div>
+        {filteredDocs.length === 0 && (
+          <div className="text-center py-12">
+            <Icon name="Search" size="lg" className="text-gray-400 mx-auto mb-4" />
+            <Heading as="h3" variant="h4" className="text-gray-500">No components found</Heading>
+            <Text variant="body" className="text-gray-500">
+              Try adjusting your search or filter criteria.
+            </Text>
+          </div>
+        )}
+      </div>
+    </DemoLayout>
   );
 }

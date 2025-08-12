@@ -17,6 +17,7 @@ import {
   Icon,
   Badge
 } from '@/components';
+import { DemoLayout } from '../../components/DemoLayout';
 
 export default function OrganismsPlaygroundPage() {
   const [showModal, setShowModal] = useState(false);
@@ -59,42 +60,43 @@ export default function OrganismsPlaygroundPage() {
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header Demo */}
-      <Header
-        logo={<Text variant="h6" className="font-bold">AtomicPNP</Text>}
-        navigation={[
-          { label: 'Home', href: '/', active: true },
-          { label: 'Components', href: '/components' },
-          { label: 'Documentation', href: '/docs' },
-        ]}
-        actions={
-          <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm">
-              <Icon name="Search" size="sm" />
-            </Button>
-            <Button variant="primary" size="sm">
-              Get Started
-            </Button>
+    <DemoLayout
+      title="Organisms Playground"
+      description="Explore and test all the organism components - complex, feature-complete components."
+    >
+      <div className="container mx-auto px-6 py-12 space-y-16">
+        
+        {/* Header Demo Section */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Header Component Demo</Heading>
+          <div className="border rounded-lg overflow-hidden bg-gray-50">
+            <Header
+              logo={<Text variant="h6" className="font-bold text-gray-900">AtomicPNP</Text>}
+              navigation={[
+                { label: 'Home', href: '#', active: true },
+                { label: 'Components', href: '#' },
+                { label: 'Documentation', href: '#' },
+              ]}
+              actions={
+                <div className="flex items-center gap-2">
+                  <Button variant="ghost" size="sm">
+                    <Icon name="Search" size="sm" />
+                  </Button>
+                  <Button variant="primary" size="sm">
+                    Get Started
+                  </Button>
+                </div>
+              }
+            />
+            <div className="p-4 bg-white">
+              <Text className="text-gray-600">This is how the Header component looks when integrated into a page layout.</Text>
+            </div>
           </div>
-        }
-      />
-
-      <div className="container mx-auto p-8 space-y-12">
-        <div className="text-center">
-          <Heading as="h1" variant="h1" className="mb-4">
-            Organisms Playground
-          </Heading>
-          <Text variant="body" color="secondary">
-            Explore and test all the organism components - complex, feature-complete components.
-          </Text>
-        </div>
-
-        <Divider />
+        </section>
 
         {/* Sidebar Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">Sidebar</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Sidebar</Heading>
           <div className="border rounded-lg overflow-hidden" style={{ height: '400px' }}>
             <div className="flex h-full">
               <Sidebar
@@ -132,11 +134,9 @@ export default function OrganismsPlaygroundPage() {
           </div>
         </section>
 
-        <Divider />
-
         {/* DataTable Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">DataTable</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">DataTable</Heading>
           <DataTable
             data={tableData}
             columns={tableColumns}
@@ -144,11 +144,9 @@ export default function OrganismsPlaygroundPage() {
           />
         </section>
 
-        <Divider />
-
         {/* Modal Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">Modal</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Modal</Heading>
           <div className="flex gap-4">
             <Button onClick={() => setShowModal(true)}>
               Open Modal
@@ -200,47 +198,29 @@ export default function OrganismsPlaygroundPage() {
           </Drawer>
         </section>
 
-        <Divider />
-
         {/* Form Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">Form Example</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Form Example</Heading>
           <div className="max-w-2xl">
             <Text>Form components would go here in a real implementation.</Text>
             <Button className="mt-4">Submit Form</Button>
           </div>
         </section>
 
-        <Divider />
-
         {/* Carousel Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">Carousel</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Carousel</Heading>
           <Text>Carousel component would display image galleries here.</Text>
         </section>
 
-        <Divider />
-
         {/* Image Gallery Demo */}
-        <section className="space-y-6">
-          <Heading as="h2" variant="h3">ImageGallery</Heading>
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">ImageGallery</Heading>
           <Text>Image gallery component would display photo collections here.</Text>
         </section>
 
         <Spacer size="xl" />
       </div>
-
-      {/* Footer Demo */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="container mx-auto px-8 text-center">
-          <Text className="text-white mb-4">
-            AtomicPNP - A comprehensive atomic design system
-          </Text>
-          <Text className="text-gray-400">
-            © 2025 AtomicPNP. All rights reserved.
-          </Text>
-        </div>
-      </footer>
-    </div>
+    </DemoLayout>
   );
 }

@@ -25,6 +25,7 @@ import {
   Divider, 
   Spacer 
 } from '@/components';
+import { DemoLayout } from '../../components/DemoLayout';
 
 export default function MoleculesPlaygroundPage() {
   const [selectedValue, setSelectedValue] = useState('');
@@ -54,21 +55,15 @@ export default function MoleculesPlaygroundPage() {
   ];
 
   return (
-    <div className="container mx-auto p-8 space-y-12">
-      <Heading as="h1" variant="h1">
-        Molecules Playground
-      </Heading>
-      
-      <Text variant="body" color="secondary">
-        Explore and test all the molecule components - composite components built from atoms.
-      </Text>
-
-      <Divider />
-
-      {/* Search Bar */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">SearchBar</Heading>
-        <div className="space-y-4 max-w-2xl">
+    <DemoLayout
+      title="Molecules Playground"
+      description="Explore and test all the molecule components - composite components built from atoms."
+    >
+      <div className="container mx-auto px-6 py-12 space-y-16">
+        {/* Search Bar */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">SearchBar</Heading>
+          <div className="space-y-4 max-w-2xl">
           <SearchBar
             placeholder="Search components..."
             onSearch={(value) => {
@@ -88,14 +83,12 @@ export default function MoleculesPlaygroundPage() {
             onSearch={(value) => console.log('Search:', value)}
           />
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Form Fields */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">FormField</Heading>
-        <div className="space-y-4 max-w-md">
+        {/* Form Fields */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">FormField</Heading>
+          <div className="space-y-4 max-w-md">
           <FormField
             label="Full Name"
             required
@@ -115,14 +108,12 @@ export default function MoleculesPlaygroundPage() {
             layout="horizontal"
           />
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Cards */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Card</Heading>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cards */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Card</Heading>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card
             variant="elevated"
             header={<Heading as="h3" variant="h4">Basic Card</Heading>}
@@ -162,14 +153,12 @@ export default function MoleculesPlaygroundPage() {
             </div>
           </Card>
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Menu Items & Dropdown */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">MenuItem & Dropdown</Heading>
-        <div className="flex flex-wrap gap-4">
+        {/* Menu Items & Dropdown */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">MenuItem & Dropdown</Heading>
+          <div className="flex flex-wrap gap-4">
           <div className="space-y-2 border rounded-md p-2 bg-white">
             <Text variant="caption" color="muted">Menu Items</Text>
             <MenuItem
@@ -214,14 +203,12 @@ export default function MoleculesPlaygroundPage() {
             </MenuItem>
           </Dropdown>
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Breadcrumb */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Breadcrumb</Heading>
-        <div className="space-y-4">
+        {/* Breadcrumb */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Breadcrumb</Heading>
+          <div className="space-y-4">
           <Breadcrumb
             items={breadcrumbItems}
             showHomeIcon
@@ -243,14 +230,12 @@ export default function MoleculesPlaygroundPage() {
             maxItems={4}
           />
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Select */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Select</Heading>
-        <div className="space-y-4 max-w-md">
+        {/* Select */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Select</Heading>
+          <div className="space-y-4 max-w-md">
           <Select
             options={selectOptions}
             placeholder="Choose a framework"
@@ -268,14 +253,12 @@ export default function MoleculesPlaygroundPage() {
             error
           />
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Checkbox & Radio */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Checkbox & Radio</Heading>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Checkbox & Radio */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Checkbox & Radio</Heading>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
             <Text variant="body" className="font-medium">Checkboxes</Text>
             <Checkbox
@@ -308,14 +291,12 @@ export default function MoleculesPlaygroundPage() {
             />
           </div>
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Tooltip & Popover */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Tooltip & Popover</Heading>
-        <div className="flex flex-wrap gap-4">
+        {/* Tooltip & Popover */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Tooltip & Popover</Heading>
+          <div className="flex flex-wrap gap-4">
           <Tooltip content="This is a tooltip" placement="top">
             <Button>Hover for tooltip</Button>
           </Tooltip>
@@ -335,14 +316,12 @@ export default function MoleculesPlaygroundPage() {
             </div>
           </Popover>
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Alerts */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Alert</Heading>
-        <div className="space-y-4">
+        {/* Alerts */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Alert</Heading>
+          <div className="space-y-4">
           <Alert variant="info" title="Information" dismissible>
             This is an informational alert with a dismiss button.
           </Alert>
@@ -356,14 +335,12 @@ export default function MoleculesPlaygroundPage() {
             There was an error processing your request. Please try again.
           </Alert>
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Toast */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Toast</Heading>
-        <div className="space-y-4">
+        {/* Toast */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Toast</Heading>
+          <div className="space-y-4">
           <Button onClick={() => setShowToast(true)}>
             Show Toast
           </Button>
@@ -378,14 +355,12 @@ export default function MoleculesPlaygroundPage() {
             />
           )}
         </div>
-      </section>
+        </section>
 
-      <Divider />
-
-      {/* Pagination */}
-      <section className="space-y-4">
-        <Heading as="h2" variant="h3">Pagination</Heading>
-        <div className="space-y-4">
+        {/* Pagination */}
+        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+          <Heading as="h2" variant="h3" className="text-gray-900">Pagination</Heading>
+          <div className="space-y-4">
           <Pagination
             currentPage={currentPage}
             totalPages={10}
@@ -395,9 +370,10 @@ export default function MoleculesPlaygroundPage() {
             Current page: {currentPage} of 10
           </Text>
         </div>
-      </section>
+        </section>
 
-      <Spacer size="xl" />
-    </div>
+        <Spacer size="xl" />
+      </div>
+    </DemoLayout>
   );
 }
