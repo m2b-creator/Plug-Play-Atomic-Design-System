@@ -1,226 +1,224 @@
 'use client';
 
-import { useState } from 'react';
-import { 
-  Header,
-  Sidebar,
-  DataTable,
-  Modal,
-  Drawer
+import {useState} from 'react';
+import {
+    Header,
+    Sidebar,
+    DataTable,
+    Modal,
+    Drawer,
+    Button,
+    Heading,
+    Text,
+    Spacer,
+    Icon,
+    Badge,
+    DemoLayout
 } from '@/components';
-import { 
-  Button, 
-  Heading, 
-  Text, 
-  Divider, 
-  Spacer,
-  Icon,
-  Badge
-} from '@/components';
-import { DemoLayout } from '../../components/DemoLayout';
 
 export default function OrganismsPlaygroundPage() {
-  const [showModal, setShowModal] = useState(false);
-  const [showDrawer, setShowDrawer] = useState(false);
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [showModal, setShowModal] = useState(false);
+    const [showDrawer, setShowDrawer] = useState(false);
+    const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
-  // Sample data for components
-  const tableData = [
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive' },
-    { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'Active' },
-  ];
+    // Sample data for components
+    const tableData = [
+        {id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active'},
+        {id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active'},
+        {id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive'},
+        {id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'Active'},
+    ];
 
-  const tableColumns = [
-    { key: 'name', label: 'Name', sortable: true },
-    { key: 'email', label: 'Email', sortable: true },
-    { key: 'role', label: 'Role', sortable: false },
-    { 
-      key: 'status', 
-      label: 'Status', 
-      sortable: false,
-      render: (value: unknown) => {
-        const status = value as string;
-        return (
-          <Badge variant={status === 'Active' ? 'success' : 'secondary'}>
-            {status}
-          </Badge>
-        );
-      }
-    },
-  ];
+    const tableColumns = [
+        {key: 'name', label: 'Name', sortable: true},
+        {key: 'email', label: 'Email', sortable: true},
+        {key: 'role', label: 'Role', sortable: false},
+        {
+            key: 'status',
+            label: 'Status',
+            sortable: false,
+            render: (value: unknown) => {
+                const status = value as string;
+                return (
+                    <Badge variant={status === 'Active' ? 'success' : 'secondary'}>
+                        {status}
+                    </Badge>
+                );
+            }
+        },
+    ];
 
-  const navigationItems = [
-    { label: 'Dashboard', href: '/dashboard', icon: <Icon name="LayoutDashboard" size="sm" /> },
-    { label: 'Users', href: '/users', icon: <Icon name="Users" size="sm" />, active: true },
-    { label: 'Products', href: '/products', icon: <Icon name="Package" size="sm" /> },
-    { label: 'Settings', href: '/settings', icon: <Icon name="Settings" size="sm" /> },
-  ];
+    const navigationItems = [
+        {label: 'Dashboard', href: '/dashboard', icon: <Icon name="LayoutDashboard" size="sm"/>},
+        {label: 'Users', href: '/users', icon: <Icon name="Users" size="sm"/>, active: true},
+        {label: 'Products', href: '/products', icon: <Icon name="Package" size="sm"/>},
+        {label: 'Settings', href: '/settings', icon: <Icon name="Settings" size="sm"/>},
+    ];
 
 
-  return (
-    <DemoLayout
-      title="Organisms Playground"
-      description="Explore and test all the organism components - complex, feature-complete components."
-    >
-      <div className="container mx-auto px-6 py-12 space-y-16">
-        
-        {/* Header Demo Section */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">Header Component Demo</Heading>
-          <div className="border rounded-lg overflow-hidden bg-gray-50">
-            <Header
-              logo={<Text variant="h6" className="font-bold text-gray-900">AtomicPNP</Text>}
-              navigation={[
-                { label: 'Home', href: '#', active: true },
-                { label: 'Components', href: '#' },
-                { label: 'Documentation', href: '#' },
-              ]}
-              actions={
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="sm">
-                    <Icon name="Search" size="sm" />
-                  </Button>
-                  <Button variant="primary" size="sm">
-                    Get Started
-                  </Button>
-                </div>
-              }
-            />
-            <div className="p-4 bg-white">
-              <Text className="text-gray-600">This is how the Header component looks when integrated into a page layout.</Text>
+    return (
+        <DemoLayout
+            title="Organisms Playground"
+            description="Explore and test all the organism components - complex, feature-complete components."
+        >
+            <div className="container mx-auto px-6 py-12 space-y-16">
+
+                {/* Header Demo Section */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">Header Component Demo</Heading>
+                    <div className="border rounded-lg overflow-hidden bg-gray-50">
+                        <Header
+                            logo={<Text variant="h6" className="font-bold text-gray-900">AtomicPNP</Text>}
+                            navigation={[
+                                {label: 'Home', href: '#', active: true},
+                                {label: 'Components', href: '#'},
+                                {label: 'Documentation', href: '#'},
+                            ]}
+                            actions={
+                                <div className="flex items-center gap-2">
+                                    <Button variant="ghost" size="sm">
+                                        <Icon name="Search" size="sm"/>
+                                    </Button>
+                                    <Button variant="primary" size="sm">
+                                        Get Started
+                                    </Button>
+                                </div>
+                            }
+                        />
+                        <div className="p-4 bg-white">
+                            <Text className="text-gray-600">This is how the Header component looks when integrated into
+                                a page layout.</Text>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Sidebar Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">Sidebar</Heading>
+                    <div className="border rounded-lg overflow-hidden" style={{height: '400px'}}>
+                        <div className="flex h-full">
+                            <Sidebar
+                                sections={[{items: navigationItems}]}
+                                collapsed={sidebarCollapsed}
+                                onCollapseChange={(collapsed) => setSidebarCollapsed(collapsed)}
+                                header={
+                                    <div className="p-4 border-b">
+                                        <Text variant="body" className="font-semibold">
+                                            {sidebarCollapsed ? 'AP' : 'AtomicPNP'}
+                                        </Text>
+                                    </div>
+                                }
+                                footer={
+                                    <div className="p-4 border-t">
+                                        <Button variant="ghost" size="sm" fullWidth>
+                                            <Icon name="LogOut" size="sm"/>
+                                            {!sidebarCollapsed && 'Logout'}
+                                        </Button>
+                                    </div>
+                                }
+                            />
+                            <div className="flex-1 p-6 bg-white">
+                                <Text>Main content area with sidebar navigation.</Text>
+                                <Button
+                                    variant="outline"
+                                    size="sm"
+                                    className="mt-4"
+                                    onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
+                                >
+                                    Toggle Sidebar
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                {/* DataTable Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">DataTable</Heading>
+                    <DataTable
+                        data={tableData}
+                        columns={tableColumns}
+                        emptyMessage="No users found"
+                    />
+                </section>
+
+                {/* Modal Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">Modal</Heading>
+                    <div className="flex gap-4">
+                        <Button onClick={() => setShowModal(true)}>
+                            Open Modal
+                        </Button>
+                        <Button onClick={() => setShowDrawer(true)} variant="outline">
+                            Open Drawer
+                        </Button>
+                    </div>
+
+                    <Modal
+                        open={showModal}
+                        onClose={() => setShowModal(false)}
+                        title="Example Modal"
+                        size="md"
+                        showCloseButton
+                    >
+                        <div className="space-y-4">
+                            <Text>
+                                This is a modal dialog with customizable content. It includes a header,
+                                body content, and footer actions.
+                            </Text>
+                            <div className="flex justify-end gap-2 pt-4">
+                                <Button variant="ghost" onClick={() => setShowModal(false)}>
+                                    Cancel
+                                </Button>
+                                <Button onClick={() => setShowModal(false)}>
+                                    Confirm
+                                </Button>
+                            </div>
+                        </div>
+                    </Modal>
+
+                    <Drawer
+                        open={showDrawer}
+                        onClose={() => setShowDrawer(false)}
+                        title="Example Drawer"
+                        position="right"
+                        size="md"
+                    >
+                        <div className="space-y-4">
+                            <Text>
+                                This is a drawer component that slides in from the side.
+                                Perfect for forms, settings, or additional content.
+                            </Text>
+                            <Button onClick={() => setShowDrawer(false)}>
+                                Close Drawer
+                            </Button>
+                        </div>
+                    </Drawer>
+                </section>
+
+                {/* Form Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">Form Example</Heading>
+                    <div className="max-w-2xl">
+                        <Text>Form components would go here in a real implementation.</Text>
+                        <Button className="mt-4">Submit Form</Button>
+                    </div>
+                </section>
+
+                {/* Carousel Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">Carousel</Heading>
+                    <Text>Carousel component would display image galleries here.</Text>
+                </section>
+
+                {/* Image Gallery Demo */}
+                <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
+                    <Heading as="h2" variant="h3" className="text-gray-900">ImageGallery</Heading>
+                    <Text>Image gallery component would display photo collections here.</Text>
+                </section>
+
+                <Spacer size="xl"/>
             </div>
-          </div>
-        </section>
-
-        {/* Sidebar Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">Sidebar</Heading>
-          <div className="border rounded-lg overflow-hidden" style={{ height: '400px' }}>
-            <div className="flex h-full">
-              <Sidebar
-                sections={[{ items: navigationItems }]}
-                collapsed={sidebarCollapsed}
-                onCollapseChange={(collapsed) => setSidebarCollapsed(collapsed)}
-                header={
-                  <div className="p-4 border-b">
-                    <Text variant="body" className="font-semibold">
-                      {sidebarCollapsed ? 'AP' : 'AtomicPNP'}
-                    </Text>
-                  </div>
-                }
-                footer={
-                  <div className="p-4 border-t">
-                    <Button variant="ghost" size="sm" fullWidth>
-                      <Icon name="LogOut" size="sm" />
-                      {!sidebarCollapsed && 'Logout'}
-                    </Button>
-                  </div>
-                }
-              />
-              <div className="flex-1 p-6 bg-white">
-                <Text>Main content area with sidebar navigation.</Text>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="mt-4"
-                  onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-                >
-                  Toggle Sidebar
-                </Button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* DataTable Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">DataTable</Heading>
-          <DataTable
-            data={tableData}
-            columns={tableColumns}
-            emptyMessage="No users found"
-          />
-        </section>
-
-        {/* Modal Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">Modal</Heading>
-          <div className="flex gap-4">
-            <Button onClick={() => setShowModal(true)}>
-              Open Modal
-            </Button>
-            <Button onClick={() => setShowDrawer(true)} variant="outline">
-              Open Drawer
-            </Button>
-          </div>
-          
-          <Modal
-            open={showModal}
-            onClose={() => setShowModal(false)}
-            title="Example Modal"
-            size="md"
-            showCloseButton
-          >
-            <div className="space-y-4">
-              <Text>
-                This is a modal dialog with customizable content. It includes a header, 
-                body content, and footer actions.
-              </Text>
-              <div className="flex justify-end gap-2 pt-4">
-                <Button variant="ghost" onClick={() => setShowModal(false)}>
-                  Cancel
-                </Button>
-                <Button onClick={() => setShowModal(false)}>
-                  Confirm
-                </Button>
-              </div>
-            </div>
-          </Modal>
-
-          <Drawer
-            open={showDrawer}
-            onClose={() => setShowDrawer(false)}
-            title="Example Drawer"
-            position="right"
-            size="md"
-          >
-            <div className="space-y-4">
-              <Text>
-                This is a drawer component that slides in from the side. 
-                Perfect for forms, settings, or additional content.
-              </Text>
-              <Button onClick={() => setShowDrawer(false)}>
-                Close Drawer
-              </Button>
-            </div>
-          </Drawer>
-        </section>
-
-        {/* Form Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">Form Example</Heading>
-          <div className="max-w-2xl">
-            <Text>Form components would go here in a real implementation.</Text>
-            <Button className="mt-4">Submit Form</Button>
-          </div>
-        </section>
-
-        {/* Carousel Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">Carousel</Heading>
-          <Text>Carousel component would display image galleries here.</Text>
-        </section>
-
-        {/* Image Gallery Demo */}
-        <section className="space-y-6 bg-white rounded-lg border border-gray-200 p-8">
-          <Heading as="h2" variant="h3" className="text-gray-900">ImageGallery</Heading>
-          <Text>Image gallery component would display photo collections here.</Text>
-        </section>
-
-        <Spacer size="xl" />
-      </div>
-    </DemoLayout>
-  );
+        </DemoLayout>
+    );
 }

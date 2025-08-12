@@ -133,7 +133,7 @@ interface BaseComponentProps {
 import { useTheme, ThemeProvider } from 'atomicpnp';
 
 // Theme provider setup
-<ThemeProvider theme="light" | "dark" | "auto">
+<ThemeProvider theme="light">
   <App />
 </ThemeProvider>
 
@@ -171,7 +171,7 @@ test('renders button correctly', () => {
 
 // Accessibility testing
 test('button has accessible name', () => {
-  render(<Button aria-label="Close">×</Button>);
+  render(<Button aria-label="Close">&times;</Button>);
   const button = screen.getByRole('button');
   expect(a11yTest.hasAccessibleName(button)).toBe(true);
 });
