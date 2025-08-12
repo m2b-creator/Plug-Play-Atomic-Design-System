@@ -1,3 +1,5 @@
+'use client';
+
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { Button, Icon, Text, Heading, Badge, Avatar } from '../atoms';

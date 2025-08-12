@@ -27,7 +27,6 @@ import {
 } from '@/components';
 
 export default function MoleculesPlaygroundPage() {
-  const [searchValue, setSearchValue] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [checkboxChecked, setCheckboxChecked] = useState(false);
   const [radioValue, setRadioValue] = useState('option1');
@@ -73,7 +72,6 @@ export default function MoleculesPlaygroundPage() {
           <SearchBar
             placeholder="Search components..."
             onSearch={(value) => {
-              setSearchValue(value);
               console.log('Search:', value);
             }}
             data-test-id="search-bar-basic"
